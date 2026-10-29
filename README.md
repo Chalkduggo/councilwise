@@ -1,0 +1,2 @@
+# councilwise
+The LLM Council
