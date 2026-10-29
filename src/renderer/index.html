@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; frame-src 'self' data:;">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Councilwise</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="shell">
+  <aside class="side">
+    <div class="brand">
+      <svg viewBox="0 0 120 120" width="34" height="34" aria-hidden="true"><path d="M93.71 31.72 A44 44 0 1 0 93.71 88.28" fill="none" stroke="#FFFFFF" stroke-width="9" stroke-linecap="round"/><g fill="#FFFFFF"><circle cx="62.56" cy="16.07" r="8"/><circle cx="29.81" cy="28" r="8"/><circle cx="16" cy="60" r="8"/><circle cx="29.81" cy="92" r="8"/><circle cx="62.56" cy="103.93" r="8"/><circle cx="93.71" cy="88.28" r="8"/></g><circle cx="93.71" cy="31.72" r="9" fill="#EF233C"/><circle cx="60" cy="60" r="15" fill="#EF233C"/></svg>
+      <span class="wm">Council<b>wise</b></span>
+    </div>
+    <nav id="nav">
+      <a data-nav="home">Home</a>
+      <a data-nav="new">New council</a>
+      <a data-nav="run">Live run</a>
+      <a data-nav="history">Sessions &amp; reports</a>
+      <div class="navsep"></div>
+      <a data-nav="members">Members &amp; logins</a>
+      <a data-nav="templates">Templates &amp; roles</a>
+      <a data-nav="settings">Settings</a>
+    </nav>
+    <div class="sidefoot">
+      <div id="liveMini" class="livemini hidden"></div>
+      <div class="ver" id="ver">Councilwise</div>
+    </div>
+  </aside>
+  <main id="view" class="view"></main>
+</div>
+<div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+<div id="modal" class="modal hidden" role="dialog" aria-modal="true"></div>
+<script src="app.js"></script>
+<script src="views/home.js"></script>
+<script src="views/new.js"></script>
+<script src="views/run.js"></script>
+<script src="views/report.js"></script>
+<script src="views/history.js"></script>
+<script src="views/members.js"></script>
+<script src="views/templates.js"></script>
+<script src="views/settings.js"></script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+[
+  {
+    "id": "strategist",
+    "name": "Strategist",
+    "brief": "Judge the big picture: is the overall direction sound, coherent and worth doing? Look for gaps between goals and plan."
+  },
+  {
+    "id": "skeptic",
+    "name": "Skeptic",
+    "brief": "Assume nothing. Question every claim, number and assumption. Ask: what would have to be true for this to work?"
+  },
+  {
+    "id": "finance",
+    "name": "Finance & numbers",
+    "brief": "Check every figure, total, unit cost, forecast and budget. Recalculate where you can and flag arithmetic or logic errors."
+  },
+  {
+    "id": "legal",
+    "name": "Legal & compliance",
+    "brief": "Look for legal, regulatory, contractual, privacy and policy risks, and for obligations that are missing or one-sided."
+  },
+  {
+    "id": "factchecker",
+    "name": "Fact-checker",
+    "brief": "Verify facts, dates, prices, names and current events against reliable, current sources. Cite your sources."
+  },
+  {
+    "id": "customer",
+    "name": "Customer advocate",
+    "brief": "Read it as the end user, buyer or reader would. Is the value clear? What would make them say no?"
+  },
+  {
+    "id": "engineer",
+    "name": "Engineer & feasibility",
+    "brief": "Judge whether it can actually be built or delivered with the stated time, people, tools and budget."
+  },
+  {
+    "id": "redteam",
+    "name": "Red Team",
+    "brief": "Attack the plan on purpose. Find the single most likely way it fails and the worst-case scenario."
+  },
+  {
+    "id": "operator",
+    "name": "Operator & delivery",
+    "brief": "Look at execution: owners, timelines, dependencies, capacity and what happens on day one."
+  },
+  {
+    "id": "editor",
+    "name": "Editor & clarity",
+    "brief": "Judge structure, clarity, length and consistency. Flag contradictions between sections and anything a reader would misread."
+  },
+  {
+    "id": "risk",
+    "name": "Risk officer",
+    "brief": "List the top risks with likelihood and impact, and check the document has a credible mitigation for each."
+  },
+  {
+    "id": "domain",
+    "name": "Domain expert",
+    "brief": "Apply deep knowledge of this field. Flag anything that an experienced practitioner would find naive, outdated or wrong."
+  }
+]

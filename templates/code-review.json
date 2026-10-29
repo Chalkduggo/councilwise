@@ -1,0 +1,55 @@
+{
+  "id": "code-review",
+  "name": "Code or technical design",
+  "description": "Source code, architecture docs and technical specs.",
+  "dimensions": [
+    {
+      "id": "correctness",
+      "name": "Correctness"
+    },
+    {
+      "id": "security",
+      "name": "Security"
+    },
+    {
+      "id": "performance",
+      "name": "Performance"
+    },
+    {
+      "id": "design",
+      "name": "Design & architecture"
+    },
+    {
+      "id": "tests",
+      "name": "Tests"
+    },
+    {
+      "id": "readability",
+      "name": "Readability"
+    },
+    {
+      "id": "ops",
+      "name": "Operability"
+    }
+  ],
+  "sections": [
+    "Overall verdict",
+    "Strengths",
+    "Critical issues",
+    "Other issues",
+    "Facts to verify",
+    "Recommended changes",
+    "Questions for the author",
+    "Scorecard"
+  ],
+  "defaultRoles": {
+    "claude": "engineer",
+    "gemini": "domain",
+    "chatgpt": "engineer",
+    "perplexity": "factchecker",
+    "grok": "redteam",
+    "deepseek": "engineer",
+    "mistral": "editor",
+    "cohere": "risk"
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "id": "document-review",
+  "name": "General document review",
+  "description": "Any plan, proposal, report or strategy document.",
+  "dimensions": [
+    {
+      "id": "clarity",
+      "name": "Clarity & structure"
+    },
+    {
+      "id": "accuracy",
+      "name": "Facts & accuracy"
+    },
+    {
+      "id": "logic",
+      "name": "Logic & consistency"
+    },
+    {
+      "id": "evidence",
+      "name": "Evidence & support"
+    },
+    {
+      "id": "feasibility",
+      "name": "Feasibility"
+    },
+    {
+      "id": "risks",
+      "name": "Risks covered"
+    },
+    {
+      "id": "completeness",
+      "name": "Completeness"
+    },
+    {
+      "id": "actionability",
+      "name": "Actionability"
+    }
+  ],
+  "sections": [
+    "Overall verdict",
+    "Strengths",
+    "Critical issues",
+    "Other issues",
+    "Facts to verify",
+    "Recommended changes",
+    "Questions for the author",
+    "Scorecard"
+  ],
+  "defaultRoles": {
+    "claude": "strategist",
+    "gemini": "domain",
+    "chatgpt": "operator",
+    "perplexity": "factchecker",
+    "grok": "redteam",
+    "deepseek": "finance",
+    "mistral": "editor",
+    "cohere": "customer"
+  }
+}

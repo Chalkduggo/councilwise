@@ -1,0 +1,59 @@
+{
+  "id": "pitch-deck",
+  "name": "Pitch deck",
+  "description": "Investor or sales decks.",
+  "dimensions": [
+    {
+      "id": "story",
+      "name": "Story & hook"
+    },
+    {
+      "id": "problem",
+      "name": "Problem"
+    },
+    {
+      "id": "solution",
+      "name": "Solution"
+    },
+    {
+      "id": "market",
+      "name": "Market size"
+    },
+    {
+      "id": "traction",
+      "name": "Traction & proof"
+    },
+    {
+      "id": "model",
+      "name": "Business model"
+    },
+    {
+      "id": "ask",
+      "name": "The ask & use of funds"
+    },
+    {
+      "id": "design",
+      "name": "Slide clarity"
+    }
+  ],
+  "sections": [
+    "Overall verdict",
+    "Strengths",
+    "Critical issues",
+    "Other issues",
+    "Facts to verify",
+    "Recommended changes",
+    "Questions for the author",
+    "Scorecard"
+  ],
+  "defaultRoles": {
+    "claude": "strategist",
+    "gemini": "domain",
+    "chatgpt": "skeptic",
+    "perplexity": "factchecker",
+    "grok": "redteam",
+    "deepseek": "finance",
+    "mistral": "editor",
+    "cohere": "customer"
+  }
+}

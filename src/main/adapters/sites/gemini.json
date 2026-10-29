@@ -1,0 +1,57 @@
+{
+  "id": "gemini",
+  "name": "Gemini",
+  "maker": "Google",
+  "monogram": "GE",
+  "url": "https://gemini.google.com/app",
+  "selectors": {
+    "input": [
+      "rich-textarea .ql-editor[contenteditable=\"true\"]",
+      "div.ql-editor",
+      "[contenteditable=\"true\"]"
+    ],
+    "send": [
+      "button[aria-label*=\"Send\" i]",
+      "button.send-button"
+    ],
+    "busy": [
+      "button[aria-label*=\"Stop\" i]"
+    ],
+    "response": [
+      "model-response .markdown",
+      "message-content .markdown",
+      "model-response"
+    ],
+    "fileInput": [
+      "input[type=\"file\"]"
+    ],
+    "loggedOut": [
+      "a[href*=\"accounts.google.com/ServiceLogin\"]",
+      "a[aria-label=\"Sign in\"]"
+    ]
+  },
+  "plan": {
+    "free": [
+      "Upgrade to Google AI Pro",
+      "Try Google AI Pro",
+      "Upgrade"
+    ],
+    "pro": [
+      "Google AI Pro",
+      "Google AI Ultra",
+      "Gemini Advanced"
+    ]
+  },
+  "upload": {
+    "supported": true,
+    "maxMB": 100
+  },
+  "pasteLimit": 100000,
+  "webAccess": true,
+  "privacyUrl": "https://myactivity.google.com/product/gemini",
+  "api": {
+    "baseUrl": "https://generativelanguage.googleapis.com/v1beta/openai",
+    "model": "gemini-2.5-pro"
+  },
+  "version": "2026.10.1"
+}

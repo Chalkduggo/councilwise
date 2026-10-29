@@ -1,0 +1,51 @@
+{
+  "id": "resume",
+  "name": "Resume or profile",
+  "description": "CVs, resumes, LinkedIn profiles and cover letters.",
+  "dimensions": [
+    {
+      "id": "impact",
+      "name": "Impact & results"
+    },
+    {
+      "id": "relevance",
+      "name": "Relevance to target role"
+    },
+    {
+      "id": "clarity",
+      "name": "Clarity & format"
+    },
+    {
+      "id": "keywords",
+      "name": "Keywords & ATS"
+    },
+    {
+      "id": "credibility",
+      "name": "Credibility"
+    },
+    {
+      "id": "story",
+      "name": "Career story"
+    }
+  ],
+  "sections": [
+    "Overall verdict",
+    "Strengths",
+    "Critical issues",
+    "Other issues",
+    "Facts to verify",
+    "Recommended changes",
+    "Questions for the author",
+    "Scorecard"
+  ],
+  "defaultRoles": {
+    "claude": "strategist",
+    "gemini": "domain",
+    "chatgpt": "operator",
+    "perplexity": "factchecker",
+    "grok": "skeptic",
+    "deepseek": "finance",
+    "mistral": "editor",
+    "cohere": "customer"
+  }
+}

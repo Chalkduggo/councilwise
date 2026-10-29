@@ -1,0 +1,96 @@
+{
+  "name": "councilwise",
+  "productName": "Councilwise",
+  "version": "1.0.0",
+  "description": "A desktop LLM council: several AI models review one document, peer-review each other, a Council Head rules, a moderator writes the final report.",
+  "main": "src/main/main.js",
+  "author": "Suman Mondal",
+  "license": "MIT",
+  "homepage": "https://github.com/YOUR-GITHUB-USERNAME/councilwise",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/YOUR-GITHUB-USERNAME/councilwise.git"
+  },
+  "keywords": [
+    "llm",
+    "llm-council",
+    "ai",
+    "electron",
+    "windows",
+    "document-review",
+    "chatgpt",
+    "claude",
+    "gemini"
+  ],
+  "scripts": {
+    "start": "electron .",
+    "demo": "electron . --demo",
+    "test": "node --test test/unit/*.test.js",
+    "test:e2e": "node test/e2e/run-e2e.js",
+    "icons": "node scripts/make-icons.js",
+    "dist:win": "electron-builder --win nsis portable",
+    "dist:dir": "electron-builder --win dir",
+    "test:engine": "electron test/e2e/engine-test.js",
+    "set-repo": "node scripts/set-repo.js"
+  },
+  "build": {
+    "appId": "io.github.councilwise",
+    "productName": "Councilwise",
+    "copyright": "Copyright \u00a9 2026 Suman Mondal",
+    "directories": {
+      "output": "dist",
+      "buildResources": "assets"
+    },
+    "files": [
+      "src/**/*",
+      "templates/**/*",
+      "assets/**/*",
+      "package.json",
+      "LICENSE",
+      "!**/*.map",
+      "!node_modules/pdf-parse/test/**",
+      "!node_modules/pdf-parse/lib/pdf.js/v1.9.426/**",
+      "!node_modules/pdf-parse/lib/pdf.js/v1.10.88/**",
+      "!node_modules/pdf-parse/lib/pdf.js/v2.0.550/**",
+      "!node_modules/docx/dist/*.iife.js",
+      "!node_modules/docx/dist/*.mjs",
+      "!node_modules/docx/dist/*.d.ts",
+      "!node_modules/docx/dist/*.d.cts"
+    ],
+    "win": {
+      "target": [
+        "nsis",
+        "portable"
+      ],
+      "icon": "assets/icon.ico",
+      "artifactName": "${productName}-${version}-${arch}-${target}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "perMachine": false,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Councilwise",
+      "artifactName": "${productName}-Setup-${version}.${ext}"
+    },
+    "portable": {
+      "artifactName": "${productName}-Portable-${version}.${ext}"
+    },
+    "publish": null,
+    "asarUnpack": []
+  },
+  "dependencies": {
+    "docx": "^9.15.0",
+    "mammoth": "^1.13.0",
+    "pdf-parse": "^1.1.1"
+  },
+  "devDependencies": {
+    "electron": "^45.1.0",
+    "electron-builder": "^26.18.0",
+    "playwright": "^1.64.1"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "id": "claude",
+  "name": "Claude",
+  "maker": "Anthropic",
+  "monogram": "CL",
+  "url": "https://claude.ai/new",
+  "selectors": {
+    "input": [
+      "div.ProseMirror[contenteditable=\"true\"]",
+      "[contenteditable=\"true\"]"
+    ],
+    "send": [
+      "button[aria-label=\"Send message\"]",
+      "button[aria-label*=\"Send\" i]"
+    ],
+    "busy": [
+      "button[aria-label*=\"Stop\" i]",
+      "[data-is-streaming=\"true\"]"
+    ],
+    "response": [
+      "div[data-is-streaming]",
+      ".font-claude-response",
+      ".font-claude-message"
+    ],
+    "fileInput": [
+      "input[type=\"file\"]"
+    ],
+    "loggedOut": [
+      "a[href*=\"/login\"]",
+      "button[data-testid=\"login-with-google\"]"
+    ]
+  },
+  "plan": {
+    "free": [
+      "Free plan",
+      "Upgrade to Pro",
+      "Upgrade plan"
+    ],
+    "pro": [
+      "Pro plan",
+      "Max plan",
+      "Team plan",
+      "Enterprise plan"
+    ]
+  },
+  "upload": {
+    "supported": true,
+    "maxMB": 30
+  },
+  "pasteLimit": 80000,
+  "webAccess": true,
+  "privacyUrl": "https://claude.ai/settings/data-privacy-controls",
+  "api": {
+    "baseUrl": "https://api.anthropic.com/v1",
+    "model": "claude-sonnet-5-5"
+  },
+  "version": "2026.10.1"
+}

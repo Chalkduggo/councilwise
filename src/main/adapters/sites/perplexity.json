@@ -1,0 +1,57 @@
+{
+  "id": "perplexity",
+  "name": "Perplexity",
+  "maker": "Perplexity AI",
+  "monogram": "PX",
+  "url": "https://www.perplexity.ai/",
+  "selectors": {
+    "input": [
+      "#ask-input",
+      "textarea[placeholder*=\"Ask\" i]",
+      "[contenteditable=\"true\"]",
+      "textarea"
+    ],
+    "send": [
+      "button[aria-label=\"Submit\"]",
+      "button[aria-label*=\"Submit\" i]",
+      "button[aria-label*=\"Send\" i]"
+    ],
+    "busy": [
+      "button[aria-label*=\"Stop\" i]"
+    ],
+    "response": [
+      "[id^=\"markdown-content\"]",
+      ".prose"
+    ],
+    "fileInput": [
+      "input[type=\"file\"]"
+    ],
+    "loggedOut": [
+      "button[aria-label*=\"Sign\" i]",
+      "a[href*=\"/login\"]"
+    ]
+  },
+  "plan": {
+    "free": [
+      "Upgrade to Pro",
+      "Try Pro"
+    ],
+    "pro": [
+      "Perplexity Pro",
+      "Perplexity Max",
+      "Enterprise Pro"
+    ]
+  },
+  "upload": {
+    "supported": true,
+    "maxMB": 25
+  },
+  "pasteLimit": 30000,
+  "webAccess": true,
+  "privacyUrl": "https://www.perplexity.ai/settings/preferences",
+  "api": {
+    "baseUrl": "https://api.perplexity.ai",
+    "model": "sonar-pro"
+  },
+  "version": "2026.10.1"
+}

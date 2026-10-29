@@ -1,0 +1,44 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test-linux:
+    name: Tests (unit + app end-to-end)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Unit tests
+        run: npm test
+      - name: Install display server
+        run: sudo apt-get update && sudo apt-get install -y xvfb libgbm1 libnss3 libasound2t64
+      - name: Engine test (mock chat site)
+        run: xvfb-run -a npx electron --no-sandbox test/e2e/engine-test.js
+      - name: App end-to-end test (demo council + web path)
+        run: xvfb-run -a -s "-screen 0 1600x1000x24" npm run test:e2e
+      - name: Upload screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshots
+          path: docs/screenshots
+
+  test-windows:
+    name: Unit tests on Windows
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm test

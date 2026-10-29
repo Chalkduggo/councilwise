@@ -1,0 +1,59 @@
+{
+  "id": "research-paper",
+  "name": "Research paper",
+  "description": "Academic papers, white papers and research reports.",
+  "dimensions": [
+    {
+      "id": "question",
+      "name": "Research question"
+    },
+    {
+      "id": "method",
+      "name": "Method & design"
+    },
+    {
+      "id": "data",
+      "name": "Data quality"
+    },
+    {
+      "id": "analysis",
+      "name": "Analysis & statistics"
+    },
+    {
+      "id": "claims",
+      "name": "Claims vs evidence"
+    },
+    {
+      "id": "novelty",
+      "name": "Novelty"
+    },
+    {
+      "id": "citations",
+      "name": "Citations & sources"
+    },
+    {
+      "id": "writing",
+      "name": "Writing & clarity"
+    }
+  ],
+  "sections": [
+    "Overall verdict",
+    "Strengths",
+    "Critical issues",
+    "Other issues",
+    "Facts to verify",
+    "Recommended changes",
+    "Questions for the author",
+    "Scorecard"
+  ],
+  "defaultRoles": {
+    "claude": "domain",
+    "gemini": "domain",
+    "chatgpt": "skeptic",
+    "perplexity": "factchecker",
+    "grok": "redteam",
+    "deepseek": "finance",
+    "mistral": "editor",
+    "cohere": "customer"
+  }
+}

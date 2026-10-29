@@ -1,0 +1,79 @@
+{
+  "id": "business-plan",
+  "name": "Business plan / strategy",
+  "description": "Business plans, strategy decks, operating plans and go-to-market plans.",
+  "dimensions": [
+    {
+      "id": "problem",
+      "name": "Problem & market"
+    },
+    {
+      "id": "offer",
+      "name": "Product & value"
+    },
+    {
+      "id": "gtm",
+      "name": "Go-to-market & funnel"
+    },
+    {
+      "id": "unit",
+      "name": "Unit economics"
+    },
+    {
+      "id": "financials",
+      "name": "Financial model & cash"
+    },
+    {
+      "id": "team",
+      "name": "Team & capacity"
+    },
+    {
+      "id": "execution",
+      "name": "Execution plan & milestones"
+    },
+    {
+      "id": "competition",
+      "name": "Competition & moat"
+    },
+    {
+      "id": "risks",
+      "name": "Risks & mitigations"
+    },
+    {
+      "id": "legal",
+      "name": "Legal & compliance"
+    },
+    {
+      "id": "tech",
+      "name": "Technology & stack"
+    },
+    {
+      "id": "metrics",
+      "name": "Metrics & gates"
+    },
+    {
+      "id": "consistency",
+      "name": "Internal consistency"
+    }
+  ],
+  "sections": [
+    "Overall verdict",
+    "Strengths",
+    "Critical issues",
+    "Other issues",
+    "Facts to verify",
+    "Recommended changes",
+    "Questions for the author",
+    "Scorecard"
+  ],
+  "defaultRoles": {
+    "claude": "strategist",
+    "gemini": "domain",
+    "chatgpt": "operator",
+    "perplexity": "factchecker",
+    "grok": "redteam",
+    "deepseek": "finance",
+    "mistral": "editor",
+    "cohere": "customer"
+  }
+}

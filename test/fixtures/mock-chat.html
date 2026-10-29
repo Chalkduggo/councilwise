@@ -1,0 +1,40 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Mock chat</title>
+<style>body{font-family:sans-serif;margin:0}main{padding:20px;padding-bottom:140px}.msg{margin:10px 0;padding:10px;border:1px solid #ccc}
+#composer{position:fixed;bottom:0;left:0;right:0;padding:12px;background:#eee;display:flex;gap:8px}
+#editor{flex:1;min-height:40px;max-height:90px;overflow:auto;background:#fff;border:1px solid #999;padding:8px}</style></head>
+<body>
+<main id="thread"></main>
+<div id="composer">
+  <div id="editor" contenteditable="true" role="textbox"></div>
+  <input type="file" id="file" style="display:none">
+  <button id="send" aria-label="Send message" disabled>Send</button>
+  <button id="stop" aria-label="Stop generating" style="display:none">Stop</button>
+</div>
+<script>
+// A chat page that behaves like the real ones: rich-text editor, a send button that is
+// disabled while empty, a streamed answer and a stop button while generating.
+const ed = document.getElementById('editor'), send = document.getElementById('send'), stop = document.getElementById('stop');
+const upd = () => { send.disabled = !ed.innerText.trim(); };
+ed.addEventListener('input', upd);
+ed.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); if (!send.disabled) go(); } });
+send.addEventListener('click', go);
+window.__received = [];
+function go() {
+  const text = ed.innerText;
+  window.__received.push(text);
+  ed.innerHTML = ''; upd();
+  const u = document.createElement('div'); u.className = 'msg user'; u.textContent = text.slice(0, 200); document.getElementById('thread').appendChild(u);
+  const a = document.createElement('div'); a.className = 'msg assistant'; document.getElementById('thread').appendChild(a);
+  let reply;
+  const part = text.match(/PART (\d+) OF (\d+)/);
+  if (part && /Do not (review it|answer) yet/.test(text)) reply = 'RECEIVED ' + part[1] + '/' + part[2];
+  else reply = 'Here is my review.\n```json\n' + JSON.stringify({ verdict: 'go_with_conditions', confidence: 'medium', summary: 'mock len ' + text.length, findings: [{ id: 'F1', title: 'Mock', severity: 'major', detail: 'd', evidence: 'Section 1', recommendation: 'r' }], scores: [] }) + '\n```';
+  stop.style.display = '';
+  let i = 0;
+  const t = setInterval(() => {
+    i += 25; a.innerText = reply.slice(0, i);
+    if (i >= reply.length) { clearInterval(t); setTimeout(() => { stop.style.display = 'none'; }, 600); }
+  }, 60);
+}
+</script></body></html>

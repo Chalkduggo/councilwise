@@ -1,0 +1,55 @@
+{
+  "id": "grok",
+  "name": "Grok",
+  "maker": "xAI",
+  "monogram": "GK",
+  "url": "https://grok.com/",
+  "selectors": {
+    "input": [
+      "textarea",
+      "[contenteditable=\"true\"]"
+    ],
+    "send": [
+      "button[type=\"submit\"]",
+      "button[aria-label*=\"Submit\" i]",
+      "button[aria-label*=\"Send\" i]"
+    ],
+    "busy": [
+      "button[aria-label*=\"Stop\" i]"
+    ],
+    "response": [
+      ".message-bubble",
+      "[class*=\"message-bubble\"]"
+    ],
+    "fileInput": [
+      "input[type=\"file\"]"
+    ],
+    "loggedOut": [
+      "a[href*=\"sign-in\"]",
+      "a[href*=\"accounts.x.ai\"]"
+    ]
+  },
+  "plan": {
+    "free": [
+      "Upgrade to SuperGrok",
+      "Upgrade"
+    ],
+    "pro": [
+      "SuperGrok",
+      "Premium+"
+    ]
+  },
+  "upload": {
+    "supported": true,
+    "maxMB": 25
+  },
+  "pasteLimit": 50000,
+  "webAccess": true,
+  "privacyUrl": "https://grok.com/",
+  "privacyHint": "Settings \u2192 Data controls \u2192 turn off \"Improve the model\".",
+  "api": {
+    "baseUrl": "https://api.x.ai/v1",
+    "model": "grok-4"
+  },
+  "version": "2026.10.1"
+}

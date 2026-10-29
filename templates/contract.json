@@ -1,0 +1,59 @@
+{
+  "id": "contract",
+  "name": "Contract or policy",
+  "description": "Contracts, agreements, terms, policies and SOPs.",
+  "dimensions": [
+    {
+      "id": "scope",
+      "name": "Scope & obligations"
+    },
+    {
+      "id": "balance",
+      "name": "Fairness & balance"
+    },
+    {
+      "id": "liability",
+      "name": "Liability & indemnity"
+    },
+    {
+      "id": "payment",
+      "name": "Payment & termination"
+    },
+    {
+      "id": "ip",
+      "name": "IP & confidentiality"
+    },
+    {
+      "id": "privacy",
+      "name": "Data & privacy"
+    },
+    {
+      "id": "compliance",
+      "name": "Regulatory compliance"
+    },
+    {
+      "id": "ambiguity",
+      "name": "Ambiguous wording"
+    }
+  ],
+  "sections": [
+    "Overall verdict",
+    "Strengths",
+    "Critical issues",
+    "Other issues",
+    "Facts to verify",
+    "Recommended changes",
+    "Questions for the author",
+    "Scorecard"
+  ],
+  "defaultRoles": {
+    "claude": "legal",
+    "gemini": "domain",
+    "chatgpt": "risk",
+    "perplexity": "factchecker",
+    "grok": "redteam",
+    "deepseek": "legal",
+    "mistral": "editor",
+    "cohere": "customer"
+  }
+}

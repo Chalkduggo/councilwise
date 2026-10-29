@@ -1,0 +1,55 @@
+{
+  "id": "decision",
+  "name": "Decision / should I do X?",
+  "description": "A decision, option comparison or proposal you want pressure-tested.",
+  "dimensions": [
+    {
+      "id": "options",
+      "name": "Options considered"
+    },
+    {
+      "id": "evidence",
+      "name": "Evidence"
+    },
+    {
+      "id": "upside",
+      "name": "Upside"
+    },
+    {
+      "id": "downside",
+      "name": "Downside & reversibility"
+    },
+    {
+      "id": "cost",
+      "name": "Cost & effort"
+    },
+    {
+      "id": "timing",
+      "name": "Timing"
+    },
+    {
+      "id": "alternatives",
+      "name": "Better alternatives"
+    }
+  ],
+  "sections": [
+    "Overall verdict",
+    "Strengths",
+    "Critical issues",
+    "Other issues",
+    "Facts to verify",
+    "Recommended changes",
+    "Questions for the author",
+    "Scorecard"
+  ],
+  "defaultRoles": {
+    "claude": "strategist",
+    "gemini": "domain",
+    "chatgpt": "operator",
+    "perplexity": "factchecker",
+    "grok": "redteam",
+    "deepseek": "finance",
+    "mistral": "editor",
+    "cohere": "customer"
+  }
+}

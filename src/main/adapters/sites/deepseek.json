@@ -1,0 +1,45 @@
+{
+  "id": "deepseek",
+  "name": "DeepSeek",
+  "maker": "DeepSeek",
+  "monogram": "DS",
+  "url": "https://chat.deepseek.com/",
+  "selectors": {
+    "input": [
+      "textarea#chat-input",
+      "textarea"
+    ],
+    "send": [
+      "div[role=\"button\"][aria-disabled=\"false\"]:last-of-type"
+    ],
+    "busy": [
+      "div[role=\"button\"] svg rect"
+    ],
+    "response": [
+      ".ds-markdown"
+    ],
+    "fileInput": [
+      "input[type=\"file\"]"
+    ],
+    "loggedOut": [
+      "a[href*=\"sign_in\"]",
+      "input[type=\"password\"]"
+    ]
+  },
+  "plan": {
+    "fixed": "Free"
+  },
+  "upload": {
+    "supported": true,
+    "maxMB": 50
+  },
+  "pasteLimit": 50000,
+  "webAccess": true,
+  "privacyUrl": "https://chat.deepseek.com/",
+  "privacyHint": "Settings \u2192 Data \u2192 turn off \"Improve the model for everyone\".",
+  "api": {
+    "baseUrl": "https://api.deepseek.com/v1",
+    "model": "deepseek-chat"
+  },
+  "version": "2026.10.1"
+}

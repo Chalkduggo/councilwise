@@ -1,0 +1,51 @@
+{
+  "id": "cohere",
+  "name": "Cohere",
+  "maker": "Cohere",
+  "monogram": "CO",
+  "url": "https://dashboard.cohere.com/playground/chat",
+  "selectors": {
+    "input": [
+      "textarea"
+    ],
+    "send": [
+      "button[type=\"submit\"]",
+      "button[aria-label*=\"Send\" i]"
+    ],
+    "busy": [
+      "button[aria-label*=\"Stop\" i]"
+    ],
+    "response": [
+      "[data-testid=\"message-bot\"]",
+      ".prose"
+    ],
+    "fileInput": [],
+    "loggedOut": [
+      "a[href*=\"/welcome/login\"]",
+      "input[type=\"password\"]"
+    ]
+  },
+  "plan": {
+    "free": [
+      "Trial key",
+      "Trial"
+    ],
+    "pro": [
+      "Production key",
+      "Production"
+    ]
+  },
+  "upload": {
+    "supported": false,
+    "maxMB": 0
+  },
+  "pasteLimit": 60000,
+  "webAccess": false,
+  "privacyUrl": "https://dashboard.cohere.com/",
+  "privacyHint": "Cohere Playground: avoid pasting secrets; trial keys are rate-limited.",
+  "api": {
+    "baseUrl": "https://api.cohere.ai/compatibility/v1",
+    "model": "command-a-03-2025"
+  },
+  "version": "2026.10.1"
+}
