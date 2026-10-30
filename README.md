@@ -49,7 +49,7 @@ One AI model reviewing an important document gives you one opinion, with one mod
 | Pause / stop / resume from checkpoint | ✅ | ❌ | ❌ | ❌ |
 | Windows app, runs locally, open source | ✅ | local web app | ✅ | ❌ |
 
-Councilwise builds on great earlier work — see [Credits](#credits).
+Councilwise is built on the LLM-council idea from [Andrej Karpathy's llm-council](https://github.com/karpathy/llm-council) — see [Credits](#credits).
 
 ## Screenshots
 
@@ -195,7 +195,7 @@ Contributions are very welcome, especially connector fixes when a site changes, 
 
 ## Credits
 
-- The *LLM council* idea — independent answers, anonymous peer review and a chairman's synthesis — was popularised by Andrej Karpathy's open-source [llm-council](https://github.com/karpathy/llm-council). Councilwise extends it for documents with roles, a separate Head and moderator, fact checking, scoring and reports.
+- **The idea comes from Andrej Karpathy's [llm-council](https://github.com/karpathy/llm-council).** His project showed the method: several models answer independently, review each other's answers anonymously, and a chairman model writes the final answer. Councilwise is built on that idea and extends it for documents — website logins instead of API keys, roles for each member, a separate Council Head and moderator, live fact-checking, a transparent confidence score, live status with pause/resume, and PDF/Word reports. Councilwise is an independent project and is not affiliated with or endorsed by Andrej Karpathy.
 - Tools such as [ChatALL](https://github.com/sunner/ChatALL) and GodMode showed that one app can talk to many chat websites through your own logins.
 - Built with [Electron](https://www.electronjs.org), [mammoth](https://github.com/mwilliamson/mammoth.js), [pdf-parse](https://gitlab.com/autokent/pdf-parse) and [docx](https://github.com/dolanmiu/docx).
 

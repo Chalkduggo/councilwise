@@ -2,6 +2,8 @@
 
 Upload one document and a short brief. Several AI models review it independently, review each other anonymously, a Council Head rules on every dispute, and a moderator writes the final report — with a confidence score you can see inside.
 
+**Credit:** Councilwise is built on the LLM-council idea from Andrej Karpathy's [llm-council](https://github.com/karpathy/llm-council) — independent answers, anonymous peer review and a chairman's synthesis — extended for documents with roles, a Council Head, a moderator, fact-checking, scoring and reports.
+
 **Downloads**
 - `Councilwise-Setup-1.0.2.exe` — installer for Windows 10/11 (recommended)
 - `Councilwise-Portable-1.0.2.exe` — runs without installing
