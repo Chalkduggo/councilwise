@@ -33,12 +33,14 @@ const DEFAULT_SETTINGS = {
   organisation: '',
   logoDataUrl: '',
   defaultFormat: 'pdf',
-  showWindowsInAuto: false,
+  showWindowsInAuto: true,
   concurrency: 4,
   responseTimeoutMin: 12,
   retries: 2,
   demoHiccup: true,
   attachOriginalWhenPossible: false,
+  browserChoice: '',
+  browserPath: '',
   firstRunDone: false
 };
 

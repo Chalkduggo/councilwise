@@ -120,7 +120,7 @@ App.views.new = {
     if (!on.find(m => m.id === d.moderatorId)) w.push('Choose a moderator from the selected members.');
     if (d.headId === d.moderatorId && on.length > 1) w.push('Head and moderator are the same model. It works, but a second model makes the moderation an independent check.');
     if (!d.demo) {
-      const notReady = on.filter(m => m.connection === 'web' && !m.signedIn);
+      const notReady = on.filter(m => (m.connection === 'web' || m.connection === 'browser') && !m.signedIn);
       if (notReady.length) w.push(`Not signed in yet: ${notReady.map(m => m.name).join(', ')}. You can sign in now in Members & logins, or during the run when the app asks.`);
       const free = on.filter(m => m.plan === 'Free');
       if (free.length && d.file && d.file.words > 15000) w.push(`${free.map(m => m.name).join(', ')} ${free.length > 1 ? 'are' : 'is'} on a Free plan; long documents may hit message limits.`);
@@ -179,7 +179,7 @@ App.views.new = {
     root.querySelector('#fc').onchange = e => { d.factCheckerId = e.target.value; };
     root.querySelectorAll('[data-tg]').forEach(el => el.onchange = () => { d[el.dataset.tg] = el.checked; rerender(); });
     root.querySelector('[data-act="all"]').onclick = () => { for (const m of App.members) d.members[m.id].on = true; rerender(); };
-    root.querySelector('[data-act="ready"]').onclick = () => { for (const m of App.members) d.members[m.id].on = !!m.signedIn || m.connection !== 'web'; rerender(); };
+    root.querySelector('[data-act="ready"]').onclick = () => { for (const m of App.members) d.members[m.id].on = !!m.signedIn || !['web', 'browser'].includes(m.connection); rerender(); };
     root.querySelector('[data-act="reset"]').onclick = () => { App.draft = defaultDraft(); rerender(); };
     root.querySelector('[data-act="start"]').onclick = async (e) => {
       const blocking = this.warnings().filter(w => /^(Choose|Pick)/.test(w));

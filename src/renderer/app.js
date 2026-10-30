@@ -22,7 +22,7 @@ const STATUS = {
   running: 'Running', completed: 'Completed'
 };
 const SESSION_STATUS = { ready: 'Ready', running: 'Running', paused: 'Paused', stopped: 'Stopped', completed: 'Completed', failed: 'Failed' };
-const CONN = { web: 'Website login', api: 'API key', demo: 'Demo' };
+const CONN = { browser: 'My Chrome/Edge', web: 'Built-in window', api: 'API key', demo: 'Demo' };
 
 function statusChip(s, label) { return `<span class="st st-${esc(s)}"><i></i>${esc(label || STATUS[s] || s)}</span>`; }
 function badge(m, extra = '') { return `<span class="badge ${extra}">${esc(m.monogram || (m.name || '?').slice(0, 2).toUpperCase())}</span>`; }

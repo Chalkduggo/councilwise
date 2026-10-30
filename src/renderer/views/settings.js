@@ -2,7 +2,7 @@
 /* global App, esc, go, call, toast */
 
 App.views.settings = {
-  async load() { App.settings = await call('settings:get'); },
+  async load() { App.settings = await call('settings:get'); App.browserStatus = await call('browser:status'); },
   render() {
     const s = App.settings, i = App.info;
     const num = (k, label, help, min, max) => `<label class="f">${label} <span class="h">${help}</span><input type="number" data-num="${k}" value="${esc(s[k])}" min="${min}" max="${max}"></label>`;
@@ -24,13 +24,21 @@ App.views.settings = {
         <h2>Defaults</h2>
         <label class="f">Default report format<div class="seg" id="deffmt">${['pdf', 'docx', 'txt', 'md'].map(f => `<button data-v="${f}" class="${s.defaultFormat === f ? 'on' : ''}">${{ pdf: 'PDF', docx: 'Word', txt: 'Text', md: 'Markdown' }[f]}</button>`).join('')}</div></label>
         ${tg('attachOriginalWhenPossible', 'Attach the original file by default', 'Otherwise the text is pasted, which is more reliable.')}
-        ${tg('showWindowsInAuto', 'Show model windows during automatic runs', 'Turn on if a site seems stuck when its window is hidden.')}
+        ${tg('showWindowsInAuto', 'Show model windows during automatic runs', 'Recommended. Some sites pause when their window is hidden.')}
         ${tg('demoHiccup', 'Demo: simulate one sign-in problem', 'Shows how the "Needs you" step works during the demo.')}
         <div class="grid3" style="margin-top:8px">
           ${num('concurrency', 'Members at once', 'Default 4', 1, 8)}
           ${num('responseTimeoutMin', 'Answer timeout (min)', 'Per message', 2, 60)}
           ${num('retries', 'Automatic retries', 'Before asking you', 0, 5)}
         </div>
+      </section>
+      <section class="card">
+        <h2>Browser for "My Chrome/Edge"</h2>
+        <p class="small muted" style="margin-top:-4px">${App.browserStatus.available ? `Using ${esc(App.browserStatus.name)} · <span class="kbd">${esc(App.browserStatus.path)}</span>` : 'Chrome or Edge not found.'}</p>
+        <label class="f">Prefer<div class="seg" id="bchoice">${[['', 'Chrome, then Edge'], ['edge', 'Edge']].map(([v, l]) => `<button data-v="${v}" class="${(s.browserChoice || '') === v ? 'on' : ''}">${l}</button>`).join('')}</div></label>
+        <label class="f" style="margin-top:10px">Browser path (optional) <span class="h">Only if Chrome or Edge is installed somewhere unusual</span><input type="text" data-txt="browserPath" value="${esc(s.browserPath || '')}" placeholder="C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"></label>
+        <p class="small muted">Councilwise uses its own browser profile, separate from your everyday browsing, so your normal Chrome or Edge is not touched.</p>
+        <button class="btn sm" data-act="savebrowser">Save browser settings</button>
       </section>
       <section class="card">
         <h2>Privacy &amp; data</h2>
@@ -55,11 +63,13 @@ App.views.settings = {
     const save = async (patch, msg) => { App.settings = await call('settings:save', patch); if (msg) toast(msg); };
     root.querySelector('[data-act="save"]').onclick = () => {
       const patch = {};
-      root.querySelectorAll('[data-txt]').forEach(el => { patch[el.dataset.txt] = el.value.trim(); });
+      root.querySelectorAll('[data-txt]').forEach(el => { if (el.dataset.txt !== 'browserPath') patch[el.dataset.txt] = el.value.trim(); });
       save(patch, 'Branding saved.');
     };
     root.querySelector('[data-act="logo"]').onclick = async () => { const r = await call('settings:chooseLogo'); if (r) { App.settings = r; go('settings'); } };
     const nl = root.querySelector('[data-act="nologo"]'); if (nl) nl.onclick = async () => { await save({ logoDataUrl: '' }); go('settings'); };
+    root.querySelectorAll('#bchoice button').forEach(b => b.onclick = async () => { await save({ browserChoice: b.dataset.v }, 'Saved.'); go('settings'); });
+    root.querySelector('[data-act="savebrowser"]').onclick = async () => { await save({ browserPath: root.querySelector('[data-txt="browserPath"]').value.trim() }, 'Browser settings saved.'); go('settings'); };
     root.querySelectorAll('#deffmt button').forEach(b => b.onclick = async () => { await save({ defaultFormat: b.dataset.v }, 'Default format saved.'); go('settings'); });
     root.querySelectorAll('[data-tg]').forEach(el => el.onchange = () => save({ [el.dataset.tg]: el.checked }, 'Saved.'));
     root.querySelectorAll('[data-num]').forEach(el => el.onchange = () => {

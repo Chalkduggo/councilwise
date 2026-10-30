@@ -26,7 +26,7 @@ LinkedIn shows video and document posts more prominently than plain links, so po
 >
 > It's free and open source (MIT). There's a one-click demo that runs without signing in to anything.
 >
-> 👉 Download and code: https://github.com/YOUR-GITHUB-USERNAME/councilwise
+> 👉 Download and code: https://github.com/Chalkduggo/councilwise
 >
 > I'd love feedback — what documents would you put in front of a council? And if a model's website changes and breaks, issues and pull requests are very welcome.
 >
@@ -44,7 +44,7 @@ LinkedIn shows video and document posts more prominently than plain links, so po
 > ✅ Change list, fact check, minority report
 > ✅ PDF / Word / Text reports
 >
-> Try the demo (no sign-in needed): https://github.com/YOUR-GITHUB-USERNAME/councilwise
+> Try the demo (no sign-in needed): https://github.com/Chalkduggo/councilwise
 >
 > #AI #OpenSource #LLM #Productivity
 
@@ -63,14 +63,14 @@ LinkedIn shows video and document posts more prominently than plain links, so po
 >
 > Inspired by Andrej Karpathy's llm-council idea, extended with roles, a separate Head and moderator, fact-checking and scoring.
 >
-> Repo (MIT): https://github.com/YOUR-GITHUB-USERNAME/councilwise
+> Repo (MIT): https://github.com/Chalkduggo/councilwise
 >
 > #OpenSource #Electron #JavaScript #LLM #AIEngineering
 
 ## First comment (post it right after publishing)
 
-> 🔗 GitHub (download + source): https://github.com/YOUR-GITHUB-USERNAME/councilwise
-> ⬇️ Windows installer: https://github.com/YOUR-GITHUB-USERNAME/councilwise/releases/latest
+> 🔗 GitHub (download + source): https://github.com/Chalkduggo/councilwise
+> ⬇️ Windows installer: https://github.com/Chalkduggo/councilwise/releases/latest
 > Tip: click "Try the demo" on the Home screen to see a full council without signing in.
 
 ## Tips

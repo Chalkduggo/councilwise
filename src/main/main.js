@@ -161,6 +161,7 @@ function registerIpc() {
   });
 
   handle('members:list', () => members.list());
+  handle('browser:status', () => members.browser.status());
   handle('members:update', (id, patch) => members.update(id, patch));
   handle('members:check', id => members.check(id));
   handle('members:open', id => { members.showWindow(id); return true; });

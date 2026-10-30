@@ -1,15 +1,15 @@
 {
   "name": "councilwise",
   "productName": "Councilwise",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "A desktop LLM council: several AI models review one document, peer-review each other, a Council Head rules, a moderator writes the final report.",
   "main": "src/main/main.js",
   "author": "Suman Mondal",
   "license": "MIT",
-  "homepage": "https://github.com/YOUR-GITHUB-USERNAME/councilwise",
+  "homepage": "https://github.com/Chalkduggo/councilwise",
   "repository": {
     "type": "git",
-    "url": "https://github.com/YOUR-GITHUB-USERNAME/councilwise.git"
+    "url": "https://github.com/Chalkduggo/councilwise.git"
   },
   "keywords": [
     "llm",
@@ -31,7 +31,8 @@
     "dist:win": "electron-builder --win nsis portable",
     "dist:dir": "electron-builder --win dir",
     "test:engine": "electron test/e2e/engine-test.js",
-    "set-repo": "node scripts/set-repo.js"
+    "set-repo": "node scripts/set-repo.js",
+    "test:browser": "node test/e2e/browser-test.js"
   },
   "build": {
     "appId": "io.github.councilwise",
@@ -83,7 +84,8 @@
   "dependencies": {
     "docx": "^9.15.0",
     "mammoth": "^1.13.0",
-    "pdf-parse": "^1.1.1"
+    "pdf-parse": "^1.1.1",
+    "ws": "^8.22.0"
   },
   "devDependencies": {
     "electron": "^45.1.0",

@@ -10,7 +10,7 @@ Thank you for helping. The most valuable contributions are:
 ## Set up
 
 ```bash
-git clone https://github.com/YOUR-GITHUB-USERNAME/councilwise.git
+git clone https://github.com/Chalkduggo/councilwise.git
 cd councilwise
 npm install
 npm run demo

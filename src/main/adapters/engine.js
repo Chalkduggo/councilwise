@@ -7,7 +7,6 @@
 // stops working, the engine falls back to generic strategies so a site redesign
 // degrades gracefully instead of breaking the whole council.
 
-const { clipboard } = require('electron');
 
 class NeedsUserError extends Error {
   constructor(reason, detail) { super(detail || reason); this.reason = reason; }
@@ -15,14 +14,6 @@ class NeedsUserError extends Error {
 
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
-let clipChain = Promise.resolve();
-function acquireClipboard() {
-  let release;
-  const next = new Promise(r => { release = r; });
-  const wait = clipChain;
-  clipChain = clipChain.then(() => next);
-  return wait.then(() => release);
-}
 
 // Helper code injected into the page. Kept small and dependency free.
 const HELPER = `
@@ -139,27 +130,13 @@ async function typeInto(wc, adapter, text) {
   const s = adapter.selectors;
   const ok = await run(wc, `window.__cw.focusInput(${J(s.input)})`);
   if (!ok) throw new NeedsUserError('no_input', 'Could not find the message box. Is the site signed in?');
-  if (text.length <= 1500) {
-    await wc.insertText(text);
-  } else {
-    // Large text: paste through the clipboard (much faster for rich editors),
-    // then restore whatever the user had on their clipboard. A lock stops two
-    // members pasting at the same moment.
-    const release = await acquireClipboard();
-    try {
-      let saved = '';
-      try { const r = clipboard.readText(); if (typeof r === 'string') saved = r; } catch { /* no clipboard */ }
-      clipboard.writeText(text);
-      wc.paste();
-      await sleep(900);
-      clipboard.writeText(saved);
-    } finally { release(); }
-    // If the paste did not land (no clipboard access), type it instead.
-    const pasted = await run(wc, `window.__cw.inputLength(${J(s.input)})`);
-    if (pasted < text.length * 0.5) {
-      await run(wc, `window.__cw.focusInput(${J(s.input)})`);
-      await wc.insertText(text);
-    }
+  // Type the text directly (no clipboard). Pasting long text makes Claude and
+  // ChatGPT turn it into an attachment chip, which hid the prompt and caused
+  // the text to be sent twice. Large text goes in chunks so the page stays responsive.
+  const CHUNK = 20000;
+  for (let i = 0; i < text.length; i += CHUNK) {
+    await wc.insertText(text.slice(i, i + CHUNK));
+    if (text.length > CHUNK) await sleep(250);
   }
   await sleep(700);
   const len = await run(wc, `window.__cw.inputLength(${J(s.input)})`);

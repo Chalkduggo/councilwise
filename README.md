@@ -8,7 +8,7 @@
 A Windows desktop app that runs an <b>LLM council</b> on your document: several AI models review it independently, review each other anonymously, a Council Head rules on every dispute, and a moderator writes the final report — with a confidence score you can see inside.</p>
 
 <p align="center">
-  <a href="https://github.com/YOUR-GITHUB-USERNAME/councilwise/releases/latest"><b>Download for Windows</b></a> ·
+  <a href="https://github.com/Chalkduggo/councilwise/releases/latest"><b>Download for Windows</b></a> ·
   <a href="#quick-start">Quick start</a> ·
   <a href="#how-a-council-works">How it works</a> ·
   <a href="#the-confidence-score">Confidence score</a> ·
@@ -61,7 +61,7 @@ Councilwise builds on great earlier work — see [Credits](#credits).
 
 ## Quick start
 
-1. **Download** `Councilwise-Setup-1.0.0.exe` from the [latest release](https://github.com/YOUR-GITHUB-USERNAME/councilwise/releases/latest) and run it. (Prefer no install? Use `Councilwise-Portable-1.0.0.exe`.)
+1. **Download** `Councilwise-Setup-1.0.0.exe` from the [latest release](https://github.com/Chalkduggo/councilwise/releases/latest) and run it. (Prefer no install? Use `Councilwise-Portable-1.0.0.exe`.)
    Windows SmartScreen may warn that the app is from an unknown publisher, because the build is not code-signed. Choose **More info → Run anyway**.
 2. **Try the demo first.** On Home, click **Try the demo**. A full council runs with simulated members on a sample document, so you can see every screen and report without signing in to anything.
 3. **Sign in to your models.** Open **Members & logins**, click **Open & sign in** on each model, and log in as you normally would. Click **Check sign-in & plan**.
@@ -111,7 +111,8 @@ The score is calculated by the app from the council's own data, never taken from
 
 | Connection | When to use it |
 |---|---|
-| **Website login** (default) | Uses your normal account and plan. Sign in once; the session is remembered on your PC. |
+| **My Chrome/Edge** (default) | Opens each member in a window of your real Chrome or Edge, with a separate Councilwise profile. Sign in once, including with Google; the session is remembered. Your everyday browser profile is never touched. |
+| **Built-in window** | Same, inside Councilwise itself. Some sign-in pages (Google in particular) refuse embedded windows; use My Chrome/Edge for those. |
 | **API key** (optional) | Steadier and faster, billed by the provider. Any OpenAI-compatible endpoint works, including OpenRouter and a local [Ollama](https://ollama.com) server. |
 | **Demo** | Simulated answers, clearly labelled as demo data. Good for trying the app and for recordings. |
 
@@ -124,7 +125,7 @@ Built-in members: Claude, Gemini, ChatGPT, Perplexity, Grok, DeepSeek, Mistral L
 ## Privacy and security
 
 - Everything (sessions, reports, settings) is stored on your PC only, in `%APPDATA%\Councilwise`.
-- Each model runs in its own separate browser profile. Your password goes only to that model's own sign-in page; Councilwise never sees or stores it. Cookies and API keys are encrypted with Windows DPAPI.
+- Members run in a dedicated Councilwise browser profile (in Chrome/Edge or the built-in windows), separate from your everyday browsing. Your password goes only to each model's own sign-in page; Councilwise never sees or stores it. Cookies and API keys are encrypted with Windows DPAPI.
 - Your document is sent only to the models you choose. Councilwise works on a copy; your original file is never changed.
 - No accounts, no analytics, no telemetry.
 - **Confidential documents:** turn off model training in each site's privacy settings first (Members & logins → Privacy settings).
@@ -140,7 +141,7 @@ Councilwise drives the websites you are signed in to, much like a very fast assi
 Requirements: Node.js 20+ and Git, on Windows 10/11 (macOS and Linux work for development).
 
 ```bash
-git clone https://github.com/YOUR-GITHUB-USERNAME/councilwise.git
+git clone https://github.com/Chalkduggo/councilwise.git
 cd councilwise
 npm install
 npm run demo          # run the app in demo mode
@@ -158,6 +159,7 @@ Releases are built automatically by GitHub Actions when a version tag (for examp
 src/main/            Electron main process
   main.js            app start, windows, sessions, IPC
   members.js         members, login windows, plan detection, connections
+  browser.js         "My Chrome/Edge": a real browser window per member, driven over the DevTools protocol
   adapters/engine.js website automation (type, send, wait, read the answer)
   adapters/sites/    one JSON connector per website
   api.js             optional OpenAI-compatible API client
@@ -175,7 +177,7 @@ test/                unit tests, engine test with a mock chat site, app end-to-e
 - **1.2** — local models out of the box, community template gallery, command-line runner.
 - **2.0** — member reliability over time (which models were right most often), shared councils for teams.
 
-Ideas and votes are welcome in [Issues](https://github.com/YOUR-GITHUB-USERNAME/councilwise/issues).
+Ideas and votes are welcome in [Issues](https://github.com/Chalkduggo/councilwise/issues).
 
 ## Contributing
 

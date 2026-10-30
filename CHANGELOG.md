@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.0.2 — 2026-10-31
+
+- **New connection: My Chrome/Edge (now the default on Windows).** Each member opens in a window of your real Chrome or Edge, using a separate Councilwise profile, so Google sign-in ("Couldn't sign you in — this browser or app may not be secure") and other strict sign-in pages work. Your everyday browser profile is never touched.
+- The built-in window is still available as **Built-in window**.
+- Settings: choose Chrome or Edge, or give a custom browser path.
+
+## 1.0.1 — 2026-10-30
+
+- Fix: long messages are now typed instead of pasted. Claude and ChatGPT turned long pastes into attachments, which hid the prompt and could send it twice.
+- Model windows are shown during automatic runs by default, because some sites pause when hidden.
+- New **Copy timeline** button on the Live run screen, for bug reports.
+
 ## 1.0.0 — 2026-10-29
 
 First public release.

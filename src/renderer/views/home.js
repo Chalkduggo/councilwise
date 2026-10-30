@@ -39,7 +39,7 @@ App.views.home = {
       <section class="card">
         <div class="row between"><h2>Your council</h2><button class="btn sm" data-act="members">Manage logins</button></div>
         <div class="mstrip">
-          ${ms.map(m => `<div class="mtile">${badge(m)}<div><div class="n">${esc(m.name)}</div><div class="s">${m.connection === 'web' ? (m.signedIn ? 'Signed in' : m.signedIn === false ? 'Not signed in' : 'Not checked yet') : esc(m.connection === 'api' ? 'API key' : 'Demo')}${m.plan && m.plan !== 'Unknown' ? ' · ' + esc(m.plan) : ''}</div></div></div>`).join('')}
+          ${ms.map(m => `<div class="mtile">${badge(m)}<div><div class="n">${esc(m.name)}</div><div class="s">${['web', 'browser'].includes(m.connection) ? (m.signedIn ? 'Signed in' : m.signedIn === false ? 'Not signed in' : 'Not checked yet') : esc(m.connection === 'api' ? 'API key' : 'Demo')}${m.plan && m.plan !== 'Unknown' ? ' · ' + esc(m.plan) : ''}</div></div></div>`).join('')}
         </div>
         <p class="muted small" style="margin:12px 0 0">Sign in once per model in <b>Members &amp; logins</b>. Councilwise remembers the session on this PC (encrypted by Windows) and never sees or stores your passwords.</p>
       </section>

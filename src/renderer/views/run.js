@@ -46,7 +46,7 @@ App.views.run = {
       </div>
     </div>
     ${need.map(m => `<div class="attn">${badge(m)}<div style="flex:1"><b>${esc(m.name)} needs you</b><span>${esc(mstates[m.id].note)}</span></div>
-      ${m.connection === 'web' && !s.config.demo ? `<button class="btn sm" data-show="${esc(m.id)}">Show window</button>` : ''}
+      ${['web', 'browser'].includes(m.connection) && !s.config.demo ? `<button class="btn sm" data-show="${esc(m.id)}">Show window</button>` : ''}
       <button class="btn sm primary" style="background:#fff;color:#111113" data-retry="${esc(m.id)}">Retry</button>
       <button class="btn sm" style="background:transparent;color:#fff" data-skip="${esc(m.id)}">Skip member</button></div>`).join('')}
     ${st === 'failed' ? `<div class="warn" style="margin-bottom:14px"><b>The council stopped with an error.</b>&nbsp;${esc((s.error || '').split('\n')[0])}</div>` : ''}
@@ -70,7 +70,7 @@ App.views.run = {
     </div>
 
     <section class="card" style="margin-top:16px">
-      <div class="row between"><h2 style="margin:0">Timeline</h2><span class="small muted">${s.log.length} events · saved after every step</span></div>
+      <div class="row between"><h2 style="margin:0">Timeline</h2><div class="row"><span class="small muted">${s.log.length} events · saved after every step</span><button class="btn sm" data-act="copylog">Copy timeline</button></div></div>
       <div class="log" style="margin-top:10px">${s.log.slice().reverse().map(l => {
         const m = s.members.find(x => x.id === l.memberId);
         return `<div class="${l.level === 'warn' ? 'warn2' : l.level === 'error' ? 'err' : l.level === 'ok' ? 'okk' : ''}"><span>${esc(fmtTime(l.t))}</span><span>${esc(m ? m.name : 'Council')}</span><span>${esc(l.msg)}</span></div>`;
@@ -106,7 +106,7 @@ App.views.run = {
     const ms = (s.memberState || {})[m.id] || { status: 'idle', note: '' };
     const tags = [m.id === s.headId && '<span class="chip red">Council Head</span>', m.id === s.moderatorId && '<span class="chip ink">Moderator</span>', m.id === s.factCheckerId && '<span class="chip">Fact-checker</span>'].filter(Boolean).join('');
     const role = (App.roles.find(r => r.id === m.roleId) || {}).name || '';
-    const canShow = m.connection === 'web' && !s.config.demo;
+    const canShow = ['web', 'browser'].includes(m.connection) && !s.config.demo;
     return `<div class="mcard ${esc(ms.status)}">
       ${badge(m, m.id === s.headId ? 'head' : '')}
       <div><div class="nm">${esc(m.name)} ${tags} ${planChip(m.plan)}</div><div class="nt">${esc(role)} · Reviewer ${esc(m.letter)}${ms.note ? ' — ' + esc(ms.note) : ''}</div></div>
@@ -142,6 +142,15 @@ App.views.run = {
     act('[data-act="restart"]', () => call('session:resume', s.id));
     act('[data-act="stop"]', () => { if (confirmStop()) call('session:stop', s.id); });
     act('[data-act="report"]', () => go('report', { id: s.id }));
+    act('[data-act="copylog"]', async () => {
+      const name = id => { const m = s.members.find(x => x.id === id); return m ? m.name : 'Council'; };
+      const lines = [`Councilwise ${App.info.version} · ${s.title} · status ${s.status} · stage ${s.stage}`,
+        ...s.members.map(m => `${m.name} [${m.connection}]: ${(s.memberState[m.id] || {}).status} — ${(s.memberState[m.id] || {}).note || ''}`), '',
+        ...s.log.map(l => `${new Date(l.t).toLocaleTimeString()}  ${name(l.memberId)}  ${l.level}  ${l.msg}`)];
+      if (s.error) lines.push('', 'Error: ' + s.error.split('\n').slice(0, 6).join('\n'));
+      try { await navigator.clipboard.writeText(lines.join('\n')); toast('Timeline copied. Paste it into a message.'); }
+      catch { toast('Could not copy. Take a screenshot instead.', true); }
+    });
     root.querySelectorAll('[data-show]').forEach(b => b.onclick = (e) => { e.stopPropagation(); call('session:memberAction', s.id, b.dataset.show, 'show'); });
     root.querySelectorAll('[data-retry]').forEach(b => b.onclick = () => call('session:memberAction', s.id, b.dataset.retry, 'retry'));
     root.querySelectorAll('[data-skip]').forEach(b => b.onclick = () => call('session:memberAction', s.id, b.dataset.skip, 'skip'));

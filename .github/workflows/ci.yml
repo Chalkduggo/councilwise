@@ -22,6 +22,8 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y xvfb libgbm1 libnss3 libasound2t64
       - name: Engine test (mock chat site)
         run: xvfb-run -a npx electron --no-sandbox test/e2e/engine-test.js
+      - name: Real-browser connection test (Chrome)
+        run: CW_BROWSER=$(which google-chrome) xvfb-run -a npm run test:browser
       - name: App end-to-end test (demo council + web path)
         run: xvfb-run -a -s "-screen 0 1600x1000x24" npm run test:e2e
       - name: Upload screenshots

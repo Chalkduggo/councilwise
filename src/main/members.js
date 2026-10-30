@@ -7,6 +7,7 @@ const store = require('./store');
 const engine = require('./adapters/engine');
 const api = require('./api');
 const demo = require('./demo');
+const browser = require('./browser');
 
 let BrowserWindow = null, app = null, shell = null;
 const windows = new Map();
@@ -17,6 +18,7 @@ const ORDER = ['claude', 'gemini', 'chatgpt', 'perplexity', 'grok', 'deepseek', 
 
 function init(electron) {
   BrowserWindow = electron.BrowserWindow; app = electron.app; shell = electron.shell;
+  browser.init({ dataDir: store.p(), getSettings: store.getSettings });
   userAdapterDir = store.p('adapters');
   fs.mkdirSync(userAdapterDir, { recursive: true });
   loadAdapters();
@@ -67,7 +69,7 @@ function describe(id, a, ov) {
   const plan = ov.planManual || ov.planDetected || ((a.plan && a.plan.fixed) || 'Unknown');
   return {
     id, name: ov.name || a.name, maker: a.maker || '', monogram: a.monogram, url: a.url,
-    connection: ov.connection || 'web',
+    connection: ov.connection || (browser.available() ? 'browser' : 'web'),
     plan, planSource: ov.planManual ? 'manual' : ov.planDetected ? 'detected' : 'unknown',
     signedIn: ov.signedIn == null ? null : ov.signedIn, lastChecked: ov.lastChecked || null,
     api: { ...apiCfg, hasKey: store.hasSecret('api:' + id) },
@@ -133,7 +135,19 @@ function getWindow(id, { show = false } = {}) {
   return win;
 }
 
-function showWindow(id) { getWindow(id, { show: true }); }
+function showWindow(id) {
+  const m = list().find(x => x.id === id);
+  if (m && m.connection === 'browser') { browser.show(id, m.url).catch(() => {}); return; }
+  getWindow(id, { show: true });
+}
+
+// The page a member runs in: a built-in window, or a window in the user's Chrome/Edge.
+async function surface(id, { show = false } = {}) {
+  const m = list().find(x => x.id === id);
+  const a = adapterFor(id);
+  if (m.connection === 'browser') return browser.tab(id, a.url, { show });
+  return getWindow(id, { show }).webContents;
+}
 function hideWindow(id) { const w = windows.get(id); if (w && !w.isDestroyed()) w.hide(); }
 
 async function check(id) {
@@ -152,15 +166,17 @@ async function check(id) {
       throw e;
     }
   }
-  const win = getWindow(id);
   const a = adapterFor(id);
-  const cur = win.webContents.getURL();
-  if (!cur || cur === 'about:blank') await engine.open(win.webContents, a.url);
-  const res = await engine.probe(win.webContents, a);
+  const wc = await surface(id);
+  const cur = wc.getURL();
+  if (!cur || cur === 'about:blank') await engine.open(wc, a.url);
+  const res = await engine.probe(wc, a);
   return update(id, { signedIn: res.signedIn, lastChecked: new Date().toISOString(), ...(res.plan !== 'Unknown' ? { planDetected: res.plan } : {}) });
 }
 
 async function signOut(id) {
+  const m = list().find(x => x.id === id);
+  if (m && m.connection === 'browser') { await browser.clearSite(m.url); return update(id, { signedIn: false, planDetected: null }); }
   const { session } = require('electron');
   await session.fromPartition('persist:cw-' + id).clearStorageData();
   return update(id, { signedIn: false, planDetected: null });
@@ -170,6 +186,7 @@ function openPrivacy(id) {
   const m = list().find(x => x.id === id);
   if (!m) return;
   if (m.connection === 'web') { const w = getWindow(id, { show: true }); w.loadURL(m.privacyUrl).catch(() => {}); }
+  else if (m.connection === 'browser') { browser.tab(id, m.url, { show: true }).then(t => t.loadURL(m.privacyUrl)).catch(() => {}); }
   else shell.openExternal(m.privacyUrl);
 }
 
@@ -182,9 +199,9 @@ function client(memberId, sessionCtx) {
   const limit = conn === 'api' ? 400000 : conn === 'demo' ? 60000 : (a.pasteLimit || 30000);
 
   async function newThread() {
-    if (conn === 'web') {
-      const win = getWindow(memberId, { show: sessionCtx.showWindows });
-      await engine.open(win.webContents, a.url);
+    if (conn === 'web' || conn === 'browser') {
+      const wc = await surface(memberId, { show: sessionCtx.showWindows });
+      await engine.open(wc, a.url);
       ms.threadUrl = '';
     } else if (conn === 'api') {
       ms.apiMessages = [];
@@ -192,10 +209,10 @@ function client(memberId, sessionCtx) {
   }
 
   async function ensureThread() {
-    if (conn !== 'web') return;
-    const win = getWindow(memberId, { show: sessionCtx.showWindows });
-    const url = win.webContents.getURL();
-    if (ms.threadUrl && url !== ms.threadUrl) await engine.open(win.webContents, ms.threadUrl);
+    if (conn !== 'web' && conn !== 'browser') return;
+    const wc = await surface(memberId);
+    const url = wc.getURL();
+    if (ms.threadUrl && url !== ms.threadUrl) await engine.open(wc, ms.threadUrl);
   }
 
   async function send(text, opts = {}) {
@@ -214,14 +231,14 @@ function client(memberId, sessionCtx) {
         return out;
       } catch (e) { ms.apiMessages.pop(); throw e; }
     }
-    const win = getWindow(memberId, { show: sessionCtx.showWindows || opts.mode === 'assisted' });
-    if (opts.mode === 'assisted') { win.show(); }
-    const out = await engine.send(win.webContents, a, text, opts);
-    ms.threadUrl = win.webContents.getURL();
+    const wc = await surface(memberId, { show: opts.mode === 'assisted' });
+    if (opts.mode === 'assisted' && conn === 'web') getWindow(memberId).show();
+    const out = await engine.send(wc, a, text, opts);
+    ms.threadUrl = wc.getURL();
     return out;
   }
 
   return { conn, limit, newThread, ensureThread, send, adapter: a, member: m };
 }
 
-module.exports = { init, loadAdapters, list, update, addCustom, removeCustom, getWindow, showWindow, hideWindow, check, signOut, openPrivacy, client, adapterFor, userAdapterDir: () => userAdapterDir };
+module.exports = { browser, init, loadAdapters, list, update, addCustom, removeCustom, getWindow, showWindow, hideWindow, check, signOut, openPrivacy, client, adapterFor, userAdapterDir: () => userAdapterDir };

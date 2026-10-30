@@ -5,7 +5,7 @@ Councilwise handles signed-in sessions to AI websites and confidential documents
 ## Reporting a vulnerability
 
 Please **do not** open a public issue. Use GitHub's private reporting instead:
-**Security → Report a vulnerability** on https://github.com/YOUR-GITHUB-USERNAME/councilwise
+**Security → Report a vulnerability** on https://github.com/Chalkduggo/councilwise
 
 You will get a reply within a few days. Please include steps to reproduce and the version (Settings → About).
 

@@ -48,7 +48,7 @@ You should see `README.md`, `package.json`, `src`, `docs` and so on.
 $u = "<username>"
 Get-ChildItem -Recurse -File -Include *.md,package.json -Exclude node_modules |
   Where-Object { $_.FullName -notmatch '\\node_modules\\' } |
-  ForEach-Object { $t = Get-Content $_.FullName -Raw; if ($t -match 'YOUR-GITHUB-USERNAME') { Set-Content $_.FullName ($t -replace 'YOUR-GITHUB-USERNAME', $u) -NoNewline; "updated $($_.Name)" } }
+  ForEach-Object { $t = Get-Content $_.FullName -Raw; if ($t -match 'Chalkduggo') { Set-Content $_.FullName ($t -replace 'Chalkduggo', $u) -NoNewline; "updated $($_.Name)" } }
 ```
 
 (If you installed Node.js, `npm run set-repo -- <username>` does the same.)
@@ -177,7 +177,7 @@ If a model's website changes and stops working, users can fix it without waiting
 
 ## Checklist before you announce
 
-- [ ] README shows your username in every link (no `YOUR-GITHUB-USERNAME` left)
+- [ ] README shows your username in every link (no `Chalkduggo` left)
 - [ ] CI is green on the Actions tab
 - [ ] Release `v1.0.0` exists with the installer, portable app and checksums
 - [ ] You installed it from the Release and ran the demo and one real council
