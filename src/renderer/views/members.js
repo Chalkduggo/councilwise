@@ -11,6 +11,10 @@ App.views.members = {
       <div class="row"><button class="btn" data-act="checkall">Check all</button><button class="btn" data-act="folder">Connector folder</button><button class="btn" data-act="reload">Reload connectors</button></div></div>
 
     <div class="note" style="margin-bottom:16px"><span>Ways to connect each member: <b>My Chrome/Edge</b> (recommended: a real browser window with its own profile, so Google and other sign-ins work), <b>Built-in window</b>, <b>API key</b> (steadier, billed by the provider) or <b>Demo</b> (simulated). If a site changes and stops working, switch that member to API or update its connector file.</span></div>
+    <div class="card" style="margin-bottom:16px;border-color:#111113">
+      <h3 style="margin:0 0 6px">Tip: use a separate Google account</h3>
+      <p class="small" style="margin:0">Create a fresh Gmail account just for Councilwise and use <b>Continue with Google</b> on every model. It's quick, keeps your everyday account separate, and signs you in to all members in a few clicks. During a council, one browser window opens per model and the prompts are typed in automatically — that's normal, just leave them open.</p>
+    </div>
     ${App.browserStatus && !App.browserStatus.available ? '<div class="warn" style="margin-bottom:16px">Chrome or Edge was not found, so "My Chrome/Edge" is unavailable. Install Google Chrome, or set the browser path in Settings.</div>' : ''}
 
     <div class="grid2">${App.members.map(m => this.card(m)).join('')}

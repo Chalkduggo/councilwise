@@ -49,6 +49,7 @@ App.views.run = {
       ${['web', 'browser'].includes(m.connection) && !s.config.demo ? `<button class="btn sm" data-show="${esc(m.id)}">Show window</button>` : ''}
       <button class="btn sm primary" style="background:#fff;color:#111113" data-retry="${esc(m.id)}">Retry</button>
       <button class="btn sm" style="background:transparent;color:#fff" data-skip="${esc(m.id)}">Skip member</button></div>`).join('')}
+    ${running && !s.config.demo && s.members.some(m => ['browser', 'web'].includes(m.connection)) ? '<div class="note" style="margin-bottom:14px"><span>Model windows are opening and the prompts are being typed into them automatically. That is normal: leave those windows open, you don\'t need to touch them.</span></div>' : ''}
     ${st === 'failed' ? `<div class="warn" style="margin-bottom:14px"><b>The council stopped with an error.</b>&nbsp;${esc((s.error || '').split('\n')[0])}</div>` : ''}
     ${st === 'stopped' ? '<div class="note" style="margin-bottom:14px">Stopped. Everything finished so far is saved. Resume continues from the last completed step.</div>' : ''}
 

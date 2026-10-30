@@ -64,10 +64,20 @@ Councilwise builds on great earlier work — see [Credits](#credits).
 1. **Download** `Councilwise-Setup-1.0.0.exe` from the [latest release](https://github.com/Chalkduggo/councilwise/releases/latest) and run it. (Prefer no install? Use `Councilwise-Portable-1.0.0.exe`.)
    Windows SmartScreen may warn that the app is from an unknown publisher, because the build is not code-signed. Choose **More info → Run anyway**.
 2. **Try the demo first.** On Home, click **Try the demo**. A full council runs with simulated members on a sample document, so you can see every screen and report without signing in to anything.
-3. **Sign in to your models.** Open **Members & logins**, click **Open & sign in** on each model, and log in as you normally would. Click **Check sign-in & plan**.
+3. **Sign in to your models.** Open **Members & logins**, click **Open & sign in** on each model, and log in. Tip: create a separate Gmail account for Councilwise and use "Continue with Google" everywhere — see [Before your first council](#before-your-first-council). Then click **Check sign-in & plan**.
 4. **Start a council.** **New council** → drop in one file (Word, PDF, text or Markdown) → write a short brief → pick a review type → choose members, roles, the Council Head and the moderator → **Start the council**.
-5. **Watch or walk away.** The Live run screen shows every member's status. If a site needs you (expired sign-in, CAPTCHA), the member turns red, Windows notifies you, and the council waits. Fix it in the window and press **Retry**, or **Skip** that member.
+5. **Watch or walk away.** Several Chrome/Edge windows open, one per model, and the prompts are typed into them automatically — that's expected, just leave them open. The Live run screen shows every member's status. If a site needs you (expired sign-in, CAPTCHA), the member turns red, Windows notifies you, and the council waits. Fix it in the window and press **Retry**, or **Skip** that member.
 6. **Read and download the report.** Verdict, confidence score, scorecard, key findings, change list, fact check, ruling, minority report — then **Save as** PDF, Word, Text or Markdown.
+
+## Before your first council
+
+A few tips that make the first run smooth:
+
+- **Use a separate Google account (recommended).** Create a fresh Gmail account just for Councilwise and use it to sign in to every model (most AI sites offer "Continue with Google"). It takes a couple of minutes, keeps your everyday account separate, and makes signing in to all eight models a one-click job. You can still use your main account if you prefer, for example to use a Pro plan you already pay for.
+- **Sign in to every member before you start.** Members & logins → **Open & sign in** on each model → **Check sign-in & plan**. Each should say *Signed in*.
+- **Expect several browser windows to open.** During a run, Councilwise opens one Chrome/Edge window per model and types the prompts into them. That is normal — don't close them, and you don't need to touch them. You can put them behind other windows or carry on with your work.
+- **Councilwise uses its own browser profile.** The Chrome/Edge windows it opens are separate from your everyday browser, so your normal bookmarks, tabs and accounts are not affected.
+- **Confidential documents:** turn off model training in each site's privacy settings first.
 
 ## How a council works
 
