@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.3 — unreleased
+
+- Contact & maintainer details: About page, sidebar footer and README now show the official LoopWise and personal contact addresses as clickable email links.
+- Attribution: "Councilwise is an open-source software product developed and maintained by LoopWise, created by Suman Mondal."
+- Links in the app now always open in your email app or browser, never inside the Councilwise window.
+
 ## 1.0.2 — 2026-10-31
 
 - **New connection: My Chrome/Edge (now the default on Windows).** Each member opens in a window of your real Chrome or Edge, using a separate Councilwise profile, so Google sign-in ("Couldn't sign you in — this browser or app may not be secure") and other strict sign-in pages work. Your everyday browser profile is never touched.

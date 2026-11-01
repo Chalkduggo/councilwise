@@ -27,6 +27,14 @@ nav a.on { background: #fff; color: #111113; font-weight: 600; }
 nav a .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--red2); margin-left: 8px; vertical-align: middle; }
 .navsep { height: 1px; background: #27272A; margin: 10px 6px; }
 .sidefoot { margin-top: auto; display: flex; flex-direction: column; gap: 10px; }
+.sidecontact { padding: 0 8px; display: flex; flex-direction: column; gap: 3px; font-size: 11.5px; }
+.sidecontact .sc-by { color: #A1A1AA; font-weight: 600; margin-bottom: 2px; }
+.sidecontact .sc-l { color: #71717A; font-size: 10px; text-transform: uppercase; letter-spacing: .6px; margin-top: 3px; }
+.sidecontact a { color: #D4D4D8; text-decoration: none; word-break: break-all; }
+.sidecontact a:hover { color: #fff; text-decoration: underline; }
+.contact-row { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--g6); align-items: baseline; }
+.contact-row:last-child { border-bottom: 0; }
+.contact-row a { font-weight: 600; word-break: break-all; }
 .ver { color: #71717A; font-size: 12px; padding: 0 8px; font-family: var(--mono); }
 .livemini { background: #1F1F23; border-radius: 12px; padding: 10px 12px; font-size: 12px; color: #D4D4D8; cursor: pointer; }
 .livemini b { color: #fff; display: block; font-size: 13px; margin-bottom: 2px; }

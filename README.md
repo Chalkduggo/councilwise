@@ -199,6 +199,20 @@ Contributions are very welcome, especially connector fixes when a site changes, 
 - Tools such as [ChatALL](https://github.com/sunner/ChatALL) and GodMode showed that one app can talk to many chat websites through your own logins.
 - Built with [Electron](https://www.electronjs.org), [mammoth](https://github.com/mwilliamson/mammoth.js), [pdf-parse](https://gitlab.com/autokent/pdf-parse) and [docx](https://github.com/dolanmiu/docx).
 
+## Contact & Maintainer
+
+Councilwise is an open-source software product developed and maintained by LoopWise, created by Suman Mondal.
+
+| | |
+|---|---|
+| **Product** | Councilwise |
+| **Development brand** | LoopWise |
+| **Creator & developer** | Suman Mondal |
+| **Official LoopWise contact** | [suman.mondal.8@loopwise.pro](mailto:suman.mondal.8@loopwise.pro) |
+| **Personal contact** | [sumanmondaljobs2022@gmail.com](mailto:sumanmondaljobs2022@gmail.com) |
+
+For product enquiries, technical discussions, collaboration, feedback and professional communication. For bugs and feature requests, please use [GitHub Issues](https://github.com/Chalkduggo/councilwise/issues) so others can follow along; for security problems, see [SECURITY.md](SECURITY.md).
+
 ## Licence
 
 [MIT](LICENSE) © 2026 Suman Mondal

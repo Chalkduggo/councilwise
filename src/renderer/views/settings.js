@@ -1,5 +1,5 @@
 'use strict';
-/* global App, esc, go, call, toast */
+/* global App, esc, go, call, toast, CONTACT */
 
 App.views.settings = {
   async load() { App.settings = await call('settings:get'); App.browserStatus = await call('browser:status'); },
@@ -53,7 +53,17 @@ App.views.settings = {
       <section class="card">
         <h2>About</h2>
         <p><b>Councilwise ${esc(i.version)}</b> · open source under the MIT licence.</p>
-        <p class="muted small">Inspired by the LLM-council idea of independent answers, anonymous peer review and a chairman's synthesis, extended for documents with roles, a Council Head ruling, moderation, fact checks and transparent scoring.</p>
+        <p id="attribution">${esc(CONTACT.attribution)}</p>
+        <div class="kpi" style="margin:10px 0 12px">
+          <div class="eyebrow" style="margin-bottom:4px">Contact &amp; maintainer</div>
+          <div class="contact-row"><span class="muted small">Product</span><span>Councilwise</span></div>
+          <div class="contact-row"><span class="muted small">Development brand</span><span>LoopWise</span></div>
+          <div class="contact-row"><span class="muted small">Creator &amp; developer</span><span>Suman Mondal</span></div>
+          <div class="contact-row"><span class="muted small">Official LoopWise contact</span><a id="mail-official" href="mailto:${esc(CONTACT.official)}">${esc(CONTACT.official)}</a></div>
+          <div class="contact-row"><span class="muted small">Personal contact</span><a id="mail-personal" href="mailto:${esc(CONTACT.personal)}">${esc(CONTACT.personal)}</a></div>
+          <p class="small muted" style="margin:8px 0 0">For product enquiries, technical discussions, collaboration, feedback and professional communication.</p>
+        </div>
+        <p class="muted small">Built on Andrej Karpathy's llm-council idea of independent answers, anonymous peer review and a chairman's synthesis, extended for documents with roles, a Council Head ruling, moderation, fact checks and transparent scoring.</p>
         <p class="muted small">Automating consumer chat websites may conflict with some providers' terms. Use Assisted mode or API keys where that matters to you.</p>
       </section>
     </div>`;

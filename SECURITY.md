@@ -7,6 +7,8 @@ Councilwise handles signed-in sessions to AI websites and confidential documents
 Please **do not** open a public issue. Use GitHub's private reporting instead:
 **Security → Report a vulnerability** on https://github.com/Chalkduggo/councilwise
 
+If you cannot use GitHub's private reporting, email the maintainer at [suman.mondal.8@loopwise.pro](mailto:suman.mondal.8@loopwise.pro) (official LoopWise contact) or [sumanmondaljobs2022@gmail.com](mailto:sumanmondaljobs2022@gmail.com) (personal contact).
+
 You will get a reply within a few days. Please include steps to reproduce and the version (Settings → About).
 
 ## How Councilwise protects you

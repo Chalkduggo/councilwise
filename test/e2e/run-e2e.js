@@ -18,7 +18,7 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
   const dataDir = fs.mkdtempSync(path.join(os.tmpdir(), 'cw-e2e-'));
   const args = [ROOT, `--data-dir=${dataDir}`, '--demo'];
   if (process.platform === 'linux') args.push('--no-sandbox');
-  const app = await electron.launch({ args, env: { ...process.env, ELECTRON_ENABLE_LOGGING: '1' } });
+  const app = await electron.launch({ args, env: { ...process.env, ELECTRON_ENABLE_LOGGING: '1', CW_TEST_NO_EXTERNAL: '1' } });
   const win = await app.firstWindow();
   const errors = [];
   win.on('pageerror', e => errors.push(e.message));
@@ -134,6 +134,36 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
   await win.click('nav a[data-nav="settings"]');
   await win.waitForSelector('text=Report branding');
   await win.screenshot({ path: path.join(SHOTS, '13-settings.png') });
+
+  // Contact & maintainer: addresses, mailto links, attribution, sidebar footer.
+  const contact = await win.evaluate(() => ({
+    official: document.getElementById('mail-official').getAttribute('href'),
+    officialText: document.getElementById('mail-official').textContent,
+    personal: document.getElementById('mail-personal').getAttribute('href'),
+    personalText: document.getElementById('mail-personal').textContent,
+    attribution: document.getElementById('attribution').textContent,
+    side: [...document.querySelectorAll('#sidecontact a')].map(a => a.getAttribute('href'))
+  }));
+  assert.strictEqual(contact.official, 'mailto:suman.mondal.8@loopwise.pro');
+  assert.strictEqual(contact.officialText, 'suman.mondal.8@loopwise.pro');
+  assert.strictEqual(contact.personal, 'mailto:sumanmondaljobs2022@gmail.com');
+  assert.strictEqual(contact.personalText, 'sumanmondaljobs2022@gmail.com');
+  assert.strictEqual(contact.attribution, 'Councilwise is an open-source software product developed and maintained by LoopWise, created by Suman Mondal.');
+  assert.deepStrictEqual(contact.side, ['mailto:suman.mondal.8@loopwise.pro', 'mailto:sumanmondaljobs2022@gmail.com']);
+  for (const href of contact.side) {
+    const opened = await win.evaluate(h => cw.call('shell:open', h), href);
+    assert.strictEqual(opened, href, 'mailto link accepted by the app');
+  }
+  const urlBefore = win.url();
+  await win.click('#mail-official');
+  await sleep(300);
+  assert.strictEqual(win.url(), urlBefore, 'clicking a mailto link must not navigate the app window');
+  const bad = await win.evaluate(() => cw.call('shell:open', 'file:///C:/Windows/system32/calc.exe').then(() => 'allowed', () => 'blocked'));
+  assert.strictEqual(bad, 'blocked', 'non-http/mailto links are refused');
+  await win.evaluate(() => document.querySelector('#attribution').scrollIntoView({ block: 'center' }));
+  await sleep(200);
+  await win.screenshot({ path: path.join(SHOTS, '14-about-contact.png') });
+  console.log('Contact links verified: both mailto links open through the app, attribution shown, sidebar footer correct');
 
   const snap = await win.evaluate(id => cw.call('session:get', id), sessionId);
 

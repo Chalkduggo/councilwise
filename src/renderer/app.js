@@ -22,6 +22,11 @@ const STATUS = {
   running: 'Running', completed: 'Completed'
 };
 const SESSION_STATUS = { ready: 'Ready', running: 'Running', paused: 'Paused', stopped: 'Stopped', completed: 'Completed', failed: 'Failed' };
+const CONTACT = {
+  attribution: 'Councilwise is an open-source software product developed and maintained by LoopWise, created by Suman Mondal.',
+  personal: 'sumanmondaljobs2022@gmail.com',
+  official: 'suman.mondal.8@loopwise.pro'
+};
 const CONN = { browser: 'My Chrome/Edge', web: 'Built-in window', api: 'API key', demo: 'Demo' };
 
 function statusChip(s, label) { return `<span class="st st-${esc(s)}"><i></i>${esc(label || STATUS[s] || s)}</span>`; }
@@ -104,12 +109,22 @@ function updateLiveMini() {
 async function boot() {
   App.info = await cw.call('app:info');
   $('#ver').textContent = `v${App.info.version} · MIT`;
+  $('#sidecontact').innerHTML = `<div class="sc-by">By LoopWise · Suman Mondal</div>
+    <span class="sc-l">Official</span><a href="mailto:${CONTACT.official}" title="Official LoopWise contact">${CONTACT.official}</a>
+    <span class="sc-l">Personal</span><a href="mailto:${CONTACT.personal}" title="Personal contact">${CONTACT.personal}</a>`;
   App.settings = await cw.call('settings:get');
   const t = await cw.call('templates:list');
   App.templates = t.templates; App.roles = t.roles;
   await refreshMembers();
   $$('#nav a').forEach(a => a.addEventListener('click', () => go(a.dataset.nav, a.dataset.nav === 'run' && App.liveId ? { id: App.liveId } : {})));
   document.addEventListener('click', e => { const g = e.target.closest('[data-goto]'); if (g) go(g.dataset.goto, App.liveId ? { id: App.liveId } : {}); });
+  // mailto: and https: links open in the user's email app / browser, never inside Councilwise.
+  document.addEventListener('click', e => {
+    const a = e.target.closest('a[href^="mailto:"], a[href^="https://"]');
+    if (!a) return;
+    e.preventDefault();
+    cw.call('shell:open', a.getAttribute('href')).catch(() => toast('Could not open the link.', true));
+  });
 
   cw.on('session:update', snap => {
     if (!App.liveId || snap.id === App.liveId) { App.live = snap; App.liveId = snap.id; }

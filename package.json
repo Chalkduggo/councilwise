@@ -1,7 +1,7 @@
 {
   "name": "councilwise",
   "productName": "Councilwise",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A desktop LLM council: several AI models review one document, peer-review each other, a Council Head rules, a moderator writes the final report.",
   "main": "src/main/main.js",
   "author": "Suman Mondal",

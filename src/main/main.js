@@ -46,6 +46,12 @@ function createWindow() {
   });
   mainWin.loadFile(path.join(__dirname, '..', 'renderer', 'index.html'));
   mainWin.once('ready-to-show', () => mainWin.show());
+  // Never let the app window navigate away from Councilwise; open links outside instead.
+  mainWin.webContents.on('will-navigate', (e, url) => {
+    if (url.startsWith('file:')) return;
+    e.preventDefault();
+    if (/^(https:|mailto:)/.test(url)) shell.openExternal(url).catch(() => {});
+  });
   mainWin.webContents.setWindowOpenHandler(({ url }) => { if (/^https:\/\//.test(url)) shell.openExternal(url); return { action: 'deny' }; });
   mainWin.on('closed', () => { mainWin = null; });
 }
@@ -222,7 +228,13 @@ function registerIpc() {
     return r.filePath;
   });
   handle('report:preview', (id, kind) => { const s = (councils.get(id) || {}).s || store.loadSession(id); return reports.previewHtml(s, kind); });
-  handle('shell:open', url => { if (/^https:\/\//.test(url)) shell.openExternal(url); return true; });
+  handle('shell:open', async url => {
+    const ok = /^https:\/\/[^\s]+$/.test(url) || /^mailto:[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(url);
+    if (!ok) throw new Error('This link type is not allowed.');
+    if (process.env.CW_TEST_NO_EXTERNAL) return url; // tests: validate only
+    await shell.openExternal(url);
+    return url;
+  });
   handle('sample:path', () => path.join(ROOT, 'assets', 'sample', 'Sample-Launch-Plan.md'));
 }
 

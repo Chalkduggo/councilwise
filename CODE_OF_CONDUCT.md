@@ -9,4 +9,4 @@ Councilwise is a friendly, welcoming project. Everyone who takes part — in iss
 
 Maintainers may edit or remove comments, commits or issues that break these rules, and may block repeat offenders.
 
-To report a problem, open a private security advisory or contact the maintainer through the email on their GitHub profile.
+To report a problem, contact the maintainer privately at [suman.mondal.8@loopwise.pro](mailto:suman.mondal.8@loopwise.pro) (official LoopWise contact) or [sumanmondaljobs2022@gmail.com](mailto:sumanmondaljobs2022@gmail.com) (personal contact).
